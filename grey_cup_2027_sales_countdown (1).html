@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#12382b">
+<title>2027 Grey Cup | Sales Countdown</title>
+<style>
+:root{--green:#12382b;--gold:#d9b45b;--cream:#f5f0e4}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;padding:22px;display:flex;align-items:center;justify-content:center;color:var(--cream);font-family:Arial,Helvetica,sans-serif;background:radial-gradient(ellipse at 50% 0%,#315b43 0%,transparent 48%),linear-gradient(145deg,#081c16,#102b22 55%,#07140f)}
+.card{width:min(960px,100%);padding:clamp(28px,6vw,64px) clamp(18px,5vw,52px);text-align:center;border:1px solid rgba(217,180,91,.48);border-radius:24px;background:rgba(5,18,13,.72);box-shadow:0 24px 80px #0008}
+.kicker{font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:700}
+h1{margin:18px 0 8px;font-size:clamp(45px,10vw,100px);line-height:.95;letter-spacing:-.055em}
+h1 span{display:block;color:var(--gold)}
+.sub{font-size:clamp(17px,3vw,25px);margin:18px 0 38px;color:#e7e0cf}
+.countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0 auto 34px;max-width:800px}
+.unit{padding:20px 8px 16px;background:linear-gradient(180deg,#ffffff14,#ffffff08);border:1px solid #ffffff20;border-radius:16px}
+.num{font-size:clamp(34px,8vw,76px);font-weight:800;line-height:1;font-variant-numeric:tabular-nums;color:#fff}
+.label{margin-top:10px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.location{font-size:clamp(16px,2.8vw,21px);font-weight:700;letter-spacing:.04em}
+.location strong{color:var(--gold)}
+.rule{width:64px;height:2px;background:var(--gold);margin:26px auto}
+.message{font-size:clamp(19px,3.5vw,30px);font-weight:800;letter-spacing:.03em}
+.foot{margin-top:16px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#c9c1ad;opacity:.85}
+.note{margin-top:20px;font-size:11px;color:#c9c1ad;opacity:.65}
+@media(max-width:520px){body{padding:12px}.card{border-radius:18px}.countdown{gap:6px}.unit{padding:16px 3px 13px;border-radius:12px}.label{font-size:9px;letter-spacing:.12em}}
+</style>
+</head>
+<body>
+<main class="card">
+  <div class="kicker">CFL • Global Partnerships • Sales Team</div>
+  <h1>GREY CUP <span>2027</span></h1>
+  <div class="sub">The road to Saskatchewan starts now.</div>
+  <section class="countdown" aria-label="Countdown to Grey Cup 2027">
+    <div class="unit"><div class="num" id="days">--</div><div class="label">Days</div></div>
+    <div class="unit"><div class="num" id="hours">--</div><div class="label">Hours</div></div>
+    <div class="unit"><div class="num" id="minutes">--</div><div class="label">Minutes</div></div>
+    <div class="unit"><div class="num" id="seconds">--</div><div class="label">Seconds</div></div>
+  </section>
+  <div class="location">📍 <strong>MOSAIC STADIUM • REGINA, SASKATCHEWAN</strong></div>
+  <div class="rule"></div>
+  <div class="message" id="message">ONE LEAGUE. ONE TEAM. ONE BIG FINISH.</div>
+  <div class="foot">Build the partnerships. Deliver the moment.</div>
+  <div class="note">Countdown is to Grey Cup Sunday. Kickoff time has not yet been announced.</div>
+</main>
+<script>
+// Official game date: Sunday, November 7, 2027.
+// Counts down to midnight at the start of Grey Cup Sunday in Regina (CST, UTC-6).
+// Update this target when the official kickoff time is announced, if desired.
+const target = new Date("2027-11-07T00:00:00-06:00").getTime();
+function update(){
+  const diff = target - Date.now();
+  if(diff <= 0){
+    ["days","hours","minutes","seconds"].forEach(id => document.getElementById(id).textContent = "0");
+    document.getElementById("message").textContent = "IT'S GREY CUP SUNDAY. LET'S DELIVER.";
+    return;
+  }
+  const total = Math.floor(diff/1000);
+  document.getElementById("days").textContent = Math.floor(total/86400);
+  document.getElementById("hours").textContent = String(Math.floor(total%86400/3600)).padStart(2,"0");
+  document.getElementById("minutes").textContent = String(Math.floor(total%3600/60)).padStart(2,"0");
+  document.getElementById("seconds").textContent = String(total%60).padStart(2,"0");
+}
+update();
+setInterval(update,1000);
+</script>
+</body>
+</html>
